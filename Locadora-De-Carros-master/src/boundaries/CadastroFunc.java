@@ -12,9 +12,9 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
 
-public class CadastroFunc { 
-	JFrame janelaFunc = new JFrame("Cadastro de Funcionários");
+public class CadastroFunc {
 
 	JLabel lblId = new JLabel("ID");
 	JLabel lblSenha = new JLabel("Senha");
@@ -24,40 +24,38 @@ public class CadastroFunc {
 	JTextField textSenha = new JTextField();
 	JTextField textSenha2 = new JTextField();
 
-	public CadastroFunc() {
+	public CadastroFunc(JPanel conteudo) {
 
-		janelaFunc.setSize(800, 600);
-		janelaFunc.getContentPane().setLayout(null);
+		JPanel panelCadFunc = new JPanel();
 
 		lblId.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblId.setBounds(10, 96, 46, 14);
-		janelaFunc.getContentPane().add(lblId);
+		lblId.setBounds(21, 27, 14, 17);
+		panelCadFunc.add(lblId);
 
 		lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblSenha.setBounds(10, 197, 46, 14);
-		janelaFunc.getContentPane().add(lblSenha);
+		lblSenha.setBounds(21, 103, 38, 17);
+		panelCadFunc.add(lblSenha);
 
 		lblConfirmeSuaSenha.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblConfirmeSuaSenha.setBounds(10, 308, 136, 14);
-		janelaFunc.getContentPane().add(lblConfirmeSuaSenha);
+		lblConfirmeSuaSenha.setBounds(21, 182, 120, 17);
+		panelCadFunc.add(lblConfirmeSuaSenha);
 
-		txtId.setBounds(174, 95, 86, 20);
-		janelaFunc.getContentPane().add(txtId);
+		txtId.setBounds(166, 27, 86, 20);
+		panelCadFunc.add(txtId);
 		txtId.setColumns(10);
 
 		textSenha.setColumns(10);
-		textSenha.setBounds(174, 196, 86, 20);
-		janelaFunc.getContentPane().add(textSenha);
+		textSenha.setBounds(166, 182, 86, 20);
+		panelCadFunc.add(textSenha);
 
 		textSenha2.setColumns(10);
-		textSenha2.setBounds(174, 307, 86, 20);
-		janelaFunc.getContentPane().add(textSenha2);
+		textSenha2.setBounds(166, 103, 86, 20);
+		panelCadFunc.add(textSenha2);
 
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Funcionario f = new Funcionario();
-				// f.setId(txtId.getText());
 				f.setSenha(textSenha.getText());
 				if (textSenha.getText().equals("") | textSenha2.getText().equals("")) {
 					JOptionPane.showMessageDialog(null, "Insira a senha e confirme a senha");
@@ -70,8 +68,7 @@ public class CadastroFunc {
 				}
 			}
 		});
-		btnSalvar.setBounds(605, 94, 89, 23);
-		janelaFunc.getContentPane().add(btnSalvar);
+		panelCadFunc.add(btnSalvar);
 
 		JButton btnLimpar = new JButton("Limpar");
 		btnLimpar.addActionListener(new ActionListener() {
@@ -81,24 +78,24 @@ public class CadastroFunc {
 				textSenha2.setText(null);
 			}
 		});
-		btnLimpar.setBounds(605, 195, 89, 23);
-		janelaFunc.getContentPane().add(btnLimpar);
+		panelCadFunc.add(btnLimpar);
 
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				janelaFunc.setVisible(false);
+				panelCadFunc.setVisible(false);
 			}
 		});
-		btnCancelar.setBounds(605, 306, 89, 23);
-		janelaFunc.getContentPane().add(btnCancelar);
+		btnCancelar.setBounds(324, 177, 97, 31);
+		panelCadFunc.add(btnCancelar);
 
-		janelaFunc.setVisible(true);
+		conteudo.removeAll();
+		conteudo.add(panelCadFunc);
+		conteudo.revalidate();
+		conteudo.repaint();
+
 	}
 
 	public static void main(String[] args) {
-
-		new CadastroFunc();
-
 	}
 }

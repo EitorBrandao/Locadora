@@ -1,23 +1,19 @@
 package boundaries;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 import control.CadastroControl;
 import entities.Usuario;
 
-public class TelaCadastro extends JFrame implements ActionListener {
-	private static final long serialVersionUID = 1L;
+public class TelaCadastro extends JFrame {
 	Usuario user = new Usuario();
-	JFrame telaCad = new JFrame();
 
 	JTextField txtNome = new JTextField();
 	JTextField txtCpf = new JTextField();
@@ -38,145 +34,145 @@ public class TelaCadastro extends JFrame implements ActionListener {
 	JButton jbSalvar = new JButton("Salvar");
 	JButton jbPesquisar = new JButton("Pesquisar");
 
-	public TelaCadastro() {
-		
-		
-		
-		telaCad.getContentPane().setLayout(null);
+	public TelaCadastro(JPanel conteudo) {
+
+		JPanel panelCad = new JPanel();
+		CadastroControl c = new CadastroControl();
+
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		telaCad.setResizable(false);
-		
+
 		lblNome.setBounds(10, 51, 72, 14);
-		telaCad.getContentPane().add(lblNome);
+		panelCad.add(lblNome);
 		lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		lblCpf.setBounds(10, 124, 72, 14);
-		telaCad.getContentPane().add(lblCpf);
+		panelCad.add(lblCpf);
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		lblEmail.setBounds(10, 197, 72, 14);
-		telaCad.getContentPane().add(lblEmail);
+		panelCad.add(lblEmail);
 		lblEndereco.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		lblEndereco.setBounds(10, 274, 72, 14);
-		telaCad.getContentPane().add(lblEndereco);
+		panelCad.add(lblEndereco);
 		lblTelefone.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		lblTelefone.setBounds(10, 345, 72, 14);
-		telaCad.getContentPane().add(lblTelefone);
+		panelCad.add(lblTelefone);
 		lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		lblSenha.setBounds(10, 424, 72, 14);
-		telaCad.getContentPane().add(lblSenha);
+		panelCad.add(lblSenha);
 
 		txtNome.setBounds(143, 51, 221, 20);
-		telaCad.getContentPane().add(txtNome);
+		panelCad.add(txtNome);
 		txtNome.setColumns(10);
 
 		txtCpf.setColumns(10);
 		txtCpf.setBounds(143, 121, 221, 20);
-		telaCad.getContentPane().add(txtCpf);
+		panelCad.add(txtCpf);
 
 		txtEmail.setColumns(10);
 		txtEmail.setBounds(143, 194, 221, 20);
-		telaCad.getContentPane().add(txtEmail);
+		panelCad.add(txtEmail);
 
 		txtEnd.setColumns(10);
 		txtEnd.setBounds(143, 271, 221, 20);
-		telaCad.getContentPane().add(txtEnd);
+		panelCad.add(txtEnd);
 
 		txtTel.setColumns(10);
 		txtTel.setBounds(143, 342, 221, 20);
-		telaCad.getContentPane().add(txtTel);
+		panelCad.add(txtTel);
 
 		txtSenha.setColumns(10);
 		txtSenha.setBounds(143, 421, 221, 20);
-		telaCad.getContentPane().add(txtSenha);
+		panelCad.add(txtSenha);
 
+		// lbl senha e confere senha
 		lblConfSenha.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblConfSenha.setBounds(10, 486, 123, 14);
-		telaCad.getContentPane().add(lblConfSenha);
+		panelCad.add(lblConfSenha);
 		txtConfSenha.setColumns(10);
 		txtConfSenha.setBounds(143, 483, 221, 20);
-		telaCad.getContentPane().add(txtConfSenha);
+		panelCad.add(txtConfSenha);
 
+		// botao salvar
 		jbSalvar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		jbSalvar.setSize(184, 52);
 		jbSalvar.setLocation(528, 50);
-		telaCad.getContentPane().add(jbSalvar);
-		jbSalvar.addActionListener(this);
+		panelCad.add(jbSalvar);
+
+		// botao pesquisar
 		jbPesquisar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		jbPesquisar.setSize(184, 52);
 		jbPesquisar.setLocation(528, 450);
-		jbPesquisar.addActionListener(this);
-		
-		telaCad.getContentPane().add(jbPesquisar);
 
-		telaCad.setVisible(true);
-		telaCad.setSize(800, 600);
-		telaCad.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		panelCad.add(jbPesquisar);
+
+		conteudo.removeAll();
+		conteudo.add(panelCad);
+		conteudo.revalidate();
+		conteudo.repaint();
 
 	}
-	
 
 	public static void main(String[] args) {
-		new TelaCadastro();
 	}
 
-	CadastroControl c = new CadastroControl();
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-				
-		if (e.getSource() == jbSalvar) {
 
-			user.setNome(txtNome.getText());
-			user.setCpf(txtCpf.getText());
-			user.setEmail(txtEmail.getText());
-			user.setEndereco(txtEnd.getText());
-			user.setTelefone(txtTel.getText());
-			user.setSenha(txtSenha.getText());
-			usuarioToBoundary(user);
-			boundaryToUsuario();
-			c.adicionar(user);
+//	@Override
+//	public void actionPerformed(ActionEvent e) {
+//
+//		if (e.getSource() == jbSalvar) {
+//
+//			user.setNome(txtNome.getText());
+//			user.setCpf(txtCpf.getText());
+//			user.setEmail(txtEmail.getText());
+//			user.setEndereco(txtEnd.getText());
+//			user.setTelefone(txtTel.getText());
+//			user.setSenha(txtSenha.getText());
+//			usuarioToBoundary(user);
+//			boundaryToUsuario();
+//			c.adicionar(user);
+//
+//		} else if (e.getSource() == jbPesquisar) {
+//
+//			c.pesquisarPorNome(txtNome.getText());
+//			usuarioToBoundary(user);
+//			boundaryToUsuario();
+//		}
+//	}
 
-		} else if (e.getSource() == jbPesquisar) {
-			
-			c.pesquisarPorNome(txtNome.getText());
-			usuarioToBoundary(user);
-			boundaryToUsuario();
-		}
-	}
-
-	public void usuarioToBoundary(Usuario user) {
-
-		txtNome.setText(user.getNome());
-		txtCpf.setText(user.getCpf());
-		txtEmail.setText(user.getEmail());
-		txtEnd.setText(user.getEndereco());
-		txtTel.setText(user.getTelefone());
-		txtSenha.setText(user.getSenha());
-
-	}
-	
-	public Usuario boundaryToUsuario() {
-		
-		try {
-
-			user.setNome(txtNome.getText());
-			user.setCpf(txtCpf.getText());
-			user.setEmail(txtEmail.getText());
-			user.setEndereco(txtEnd.getText());
-			user.setTelefone(txtTel.getText());
-			user.setSenha(txtSenha.getText());
-
-		} catch (NumberFormatException e1) {
-			e1.printStackTrace();
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
-		return user;
-
-	}
+//	public void usuarioToBoundary(Usuario user) {
+//
+//		txtNome.setText(user.getNome());
+//		txtCpf.setText(user.getCpf());
+//		txtEmail.setText(user.getEmail());
+//		txtEnd.setText(user.getEndereco());
+//		txtTel.setText(user.getTelefone());
+//		txtSenha.setText(user.getSenha());
+//
+//	}
+//
+//	public Usuario boundaryToUsuario() {
+//
+//		try {
+//
+//			user.setNome(txtNome.getText());
+//			user.setCpf(txtCpf.getText());
+//			user.setEmail(txtEmail.getText());
+//			user.setEndereco(txtEnd.getText());
+//			user.setTelefone(txtTel.getText());
+//			user.setSenha(txtSenha.getText());
+//
+//		} catch (NumberFormatException e1) {
+//			e1.printStackTrace();
+//		} catch (ParseException e1) {
+//			e1.printStackTrace();
+//		}
+//		return user;
+//
+//	}
 
 }
