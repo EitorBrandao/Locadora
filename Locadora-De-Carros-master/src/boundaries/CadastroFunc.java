@@ -13,7 +13,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class CadastroFunc {
+public class CadastroFunc { 
 	JFrame janelaFunc = new JFrame("Cadastro de Funcionários");
 
 	JLabel lblId = new JLabel("ID");
@@ -85,6 +85,11 @@ public class CadastroFunc {
 		janelaFunc.getContentPane().add(btnLimpar);
 
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				janelaFunc.setVisible(false);
+			}
+		});
 		btnCancelar.setBounds(605, 306, 89, 23);
 		janelaFunc.getContentPane().add(btnCancelar);
 
