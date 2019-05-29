@@ -25,4 +25,7 @@ public class Funcionario {
 		this.senha = senha;
 	}
 	
+	public void CadastraCarro () {
+		
+	}
 }

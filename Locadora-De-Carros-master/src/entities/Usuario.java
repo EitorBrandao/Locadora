@@ -7,6 +7,7 @@ public class Usuario {
 	private String cpf;
 	private String email;
 	private String endereco;
+	private String casaNum;
 	private String telefone;
 	private String senha;
 	
@@ -46,4 +47,15 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	public String getCasaNum() {
+		return casaNum;
+	}
+	public void setCasaNum(String casaNum) {
+		this.casaNum = casaNum;
+	}
+
+	public void Aluga() {
+		
+	}
+
 }
