@@ -57,7 +57,7 @@ public class TelaCadastroFunc {
 		textField_3.setBounds(153, 359, 86, 20);
 		painelCadFunc.add(textField_3);
 		
-		JLabel lblCadastroFunc = new JLabel("Cadastro de Funcion\u00E1rios");
+		JLabel lblCadastroFunc = new JLabel("Cadastro de Funcionarios");
 		lblCadastroFunc.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblCadastroFunc.setBounds(300, 30, 257, 25);
 		painelCadFunc.add(lblCadastroFunc);

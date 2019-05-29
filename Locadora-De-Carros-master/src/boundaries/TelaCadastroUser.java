@@ -129,19 +129,18 @@ public class TelaCadastroUser implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
 		if (e.getSource() == btConfirmaCad) {
-			if ((txtNome == null) | (txtCpf == null) | (txtEmail == null) | (txtEnd == null) | (txtNum == null)
-					| (txtTel == null)) {
+			if ((txtNome.getText().equals("")) | (txtCpf.getText().equals("")) | (txtEmail.getText().equals(""))
+					| (txtEnd.getText().equals("")) | (txtNum.getText().equals("")) | (txtTel.getText().equals(""))) {
 				JOptionPane.showMessageDialog(null, "Insira seus dados");
-			} else if (txtSenha == null | txtConfSenha == null) {
+			} else if (txtSenha.getText().equals("") | txtConfSenha.getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "Digite uma senha");
-			} else if (txtConfSenha == null) {
+			} else if (txtConfSenha.getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "Confirme sua senha");
+			} else {
+				UserToBoundary();
+				userControl.CadastraUser(user);
 			}
-			UserToBoundary();
-			userControl.CadastraUser(user);
 		}
-
 	}
 }
