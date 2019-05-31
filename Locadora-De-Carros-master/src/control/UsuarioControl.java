@@ -13,9 +13,10 @@ public class UsuarioControl {
 	
 	public void CadastraUser (Usuario user) { 
 	
+		
 	
 		userList.add(user);
-		System.out.println(userList.size() + " Usuario: " +user.getNome());
+		System.out.println(userList.size() + user.getNome());
 
 		
 	}

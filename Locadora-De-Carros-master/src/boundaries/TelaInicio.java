@@ -7,10 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
-
-import control.UsuarioControl;
-import entities.Usuario;
 
 public class TelaInicio extends Janela implements ActionListener {
 	
@@ -26,8 +24,11 @@ public class TelaInicio extends Janela implements ActionListener {
 	JButton btConfirma = new JButton("Confirmar");
 	JButton btAreaFunc = new JButton("Área de Funcionarios");
 	
+	
 	public TelaInicio () {
-				
+		
+		
+
 		principal.getContentPane().add(painelIni);
 		painelIni.setLayout(null);
 		painelIni.add(txtLog);
@@ -57,7 +58,7 @@ public class TelaInicio extends Janela implements ActionListener {
 		lblCad.setBounds(283, 216, 121, 30);
 		btConfirma.setBounds(29, 145, 109, 23);
 		btAreaFunc.setBounds(29, 250, 157, 43);
-		
+	
 		btConfirma.addActionListener(this);
 		btCad.addActionListener(this);
 		btAreaFunc.addActionListener(this);
@@ -77,7 +78,7 @@ public void actionPerformed(ActionEvent e) {
 		principal.repaint();
 		principal.revalidate();	
 	
-	} else if (e.getSource() == btAreaFunc) {
+	} if (e.getSource() == btAreaFunc) {
 	
 		 String[] options = { "Sim", "Não" };  
 	        int result = JOptionPane.showOptionDialog(null, "Você já é cadastrado(a)", "Área de Funcionários",   
@@ -86,7 +87,7 @@ public void actionPerformed(ActionEvent e) {
 		
 		case 0 :
 			JOptionPane.showInputDialog(null, "Digite seu ID", "Login");
-			JOptionPane.showInputDialog(null, "Digite sua Senha", "Senha");
+			JOptionPane.showInputDialog(null, "Digite sua Senha", "Login");
 			
 			
 			break;
@@ -94,17 +95,34 @@ public void actionPerformed(ActionEvent e) {
 		case 1: 
 			TelaCadastroFunc func = new TelaCadastroFunc();
 			
-			principal.remove(painelIni);
-			principal.setSize(800, 600);
-			principal.getContentPane().add(func.painelCadFunc);
-			principal.repaint();
-			principal.revalidate();
+		principal.remove(painelIni);
+		principal.setSize(800, 600);
+		principal.getContentPane().add(func.painelCadFunc);
+		principal.repaint();
+		principal.revalidate();
 			break;
+		
+		
+		}
+			
 		}
 	
+	if (e.getSource() == btConfirma && txtLog.getText().equals("Jean Felipe") && txtSenha.getText().equals("123456")) {
+		
+		TelaAlugaCarro aluga = new TelaAlugaCarro ();
+		principal.remove (painelIni);
+		principal.setSize(800, 600);
+		principal.getContentPane().add(aluga.painelAluga);
+		principal.repaint();
+		principal.revalidate();	
+	
+	} else {
+
+			JOptionPane.showMessageDialog(null,"Usuário ou senha errados");
+			txtLog.setText(null);
+			txtSenha.setText(null);
 	}  
-
-
-}
-
+		
+	}
+	
 }
