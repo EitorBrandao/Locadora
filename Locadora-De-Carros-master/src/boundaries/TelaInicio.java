@@ -95,28 +95,25 @@ public class TelaInicio extends Janela implements ActionListener {
 				principal.repaint();
 				principal.revalidate();
 				break;
-
 			}
-
 		}
 
-		if (e.getSource() == btConfirma && txtLog.getText().equals("Jean Felipe")
-				&& txtSenha.getText().equals("123456")) {
+		if (e.getSource() == btConfirma) {
+			if (txtLog.getText().equals("Jean Felipe") | txtSenha.getText().equals("123456")) {
 
-			TelaAlugaCarro aluga = new TelaAlugaCarro();
-			principal.remove(painelIni);
-			principal.setSize(800, 600);
-			principal.getContentPane().add(aluga.painelAluga);
-			principal.repaint();
-			principal.revalidate();
+				TelaAlugaCarro aluga = new TelaAlugaCarro();
+				principal.remove(painelIni);
+				principal.setSize(800, 600);
+				principal.getContentPane().add(aluga.painelAluga);
+				principal.repaint();
+				principal.revalidate();
 
-		} else {
+			} else {
 
-			JOptionPane.showMessageDialog(null, "Usuário ou senha errados");
-			txtLog.setText(null);
-			txtSenha.setText(null);
+				JOptionPane.showMessageDialog(null, "Usuário ou senha errados");
+				txtLog.setText(null);
+				txtSenha.setText(null);
+			}
 		}
-
 	}
-
 }
