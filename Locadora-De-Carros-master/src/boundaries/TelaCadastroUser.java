@@ -11,17 +11,22 @@ import javax.swing.JTextField;
 
 import control.UsuarioControl;
 import entities.Usuario;
+import boundaries.TelaInicio;
 
 public class TelaCadastroUser implements ActionListener {
 
+	
+	
 	JPanel painelCadUser = new JPanel ();
 	JLabel lblNome = new JLabel("Nome");
 	JLabel lblCpf = new JLabel("CPF");
+	JLabel lblEmail = new JLabel("Email");
 	JLabel lblEnd = new JLabel("Endereço");
 	JLabel lblNum = new JLabel("Número");
 	JLabel lblTel = new JLabel("Telefone");
 	JLabel lblSenha = new JLabel("Senha");
 	JLabel lblConfSenha = new JLabel("Confirme a senha");
+	
 	JTextField txtNome;
 	JTextField txtCpf;
 	JTextField txtEnd;
@@ -29,8 +34,9 @@ public class TelaCadastroUser implements ActionListener {
 	JTextField txtSenha;
 	JTextField txtNum;
 	JTextField txtConfSenha = new JTextField();
+	
 	JButton btConfirmaCad = new JButton("Confirmar");
-	JLabel lblEmail = new JLabel("Email");
+	JButton btInicio = new JButton("Home");
 	 JTextField txtEmail = new JTextField();
 	JLabel lblCadUser = new JLabel("Cadastro de Usu\u00E1rios");
 	
@@ -40,18 +46,20 @@ public class TelaCadastroUser implements ActionListener {
 		
 		
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		painelCadUser.add(lblNome);
 		lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		painelCadUser.add(lblCpf);
 		lblEnd.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		painelCadUser.add(lblEnd);
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNum.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		painelCadUser.add(lblNum);
 		lblTel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		painelCadUser.add(lblTel);
 		lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		painelCadUser.add(lblSenha);
 		lblConfSenha.setFont(new Font("Tahoma", Font.PLAIN, 15));
+
+		painelCadUser.add(lblNome);
+		painelCadUser.add(lblCpf);
+		painelCadUser.add(lblEnd);
+		painelCadUser.add(lblNum);
+		painelCadUser.add(lblTel);
+		painelCadUser.add(lblSenha);
 		painelCadUser.add(lblConfSenha);
 		
 		lblNome.setBounds(45, 160, 46, 14);
@@ -64,7 +72,6 @@ public class TelaCadastroUser implements ActionListener {
 		
 		
 		painelCadUser.setLayout(null);
-		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblEmail.setBounds(45, 220, 98, 31);
 		painelCadUser.add(lblEmail);
 		
@@ -103,8 +110,11 @@ public class TelaCadastroUser implements ActionListener {
 		painelCadUser.add(txtConfSenha);
 		
 		btConfirmaCad.setBounds(548, 518, 114, 23);
+		btInicio.setBounds(548, 458, 114, 23);
 		btConfirmaCad.addActionListener(this);
+		btInicio.addActionListener(this);
 		painelCadUser.add(btConfirmaCad);
+		painelCadUser.add(btInicio);
 		
 		painelCadUser.add(txtEmail);
 		lblCadUser.setFont(new Font("Tahoma", Font.PLAIN, 19));
@@ -119,11 +129,11 @@ public class TelaCadastroUser implements ActionListener {
 	
 		
 		user.setNome(txtNome.getText());
-		user.setCpf(txtCpf.getText());
+		user.setCpf(Integer.parseInt(txtCpf.getText()));
 		user.setEmail(txtEmail.getText());
 		user.setEndereco(txtEnd.getText());
-		user.setCasaNum(txtNum.getText());
-		user.setTelefone(txtTel.getText());
+		user.setCasaNum(Integer.parseInt(txtNum.getText()));
+		user.setTelefone(Integer.parseInt(txtTel.getText()));
 		user.setSenha(txtSenha.getText());
 	
 		txtNome.setText(null);
@@ -140,13 +150,21 @@ public class TelaCadastroUser implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-	
+	 
 		if (e.getSource() == btConfirmaCad) {
 					
 			UserToBoundary();	
 			userControl.CadastraUser(user);
 			
 			
+		} else if (e.getSource() == btInicio) {
+			TelaInicio t = new TelaInicio();
+			
+			t.principal.remove(painelCadUser);
+			t.principal.setSize(800, 600);
+			t.principal.getContentPane().add(t.painelIni);
+			t.principal.repaint();
+			t.principal.revalidate();
 		}
 		
 		
