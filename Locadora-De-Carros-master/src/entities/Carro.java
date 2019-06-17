@@ -1,7 +1,9 @@
 package entities;
 
 public class Carro {
-
+//carro precisa de um id.... não tem jeito
+	//vdd, nao colocaram no diagrama. mas tem que ter mesmo.
+	private int idCarro;
 	private String nomeCarro;
 	private String marca;
 	private String modelo;
@@ -44,5 +46,11 @@ public class Carro {
 	}
 	public void setPreco(float preco) {
 		this.preco = preco;
+	}
+	public int getIdCarro() {
+		return idCarro;
+	}
+	public void setIdCarro(int idCarro) {
+		this.idCarro = idCarro;
 	}
 }

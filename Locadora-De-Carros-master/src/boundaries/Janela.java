@@ -46,11 +46,12 @@ public class Janela implements ActionListener {
 
 		}
 		if (e.getSource() == logUser.btConfirma) {
-			if (logUser.txtLog.getText().equals("123") && logUser.txtSenha.getText().equals("123")) {
-				principal.dispose();
-				new TelaAlugaCarro();
+			if (logUser.txtLog.getText().equals("123") | logUser.txtSenha.getPassword().equals("123")) {
 
-			} else if (logUser.txtLog.getText().equals("") || logUser.txtSenha.getText().equals("")) {
+				principal.dispose();
+				new TelaUser();
+
+			} else if (logUser.txtLog.getText().equals("") || logUser.txtSenha.getPassword().equals("")) {
 				JOptionPane.showMessageDialog(null, "Digite o usuario e senha");
 			}
 		}
@@ -62,11 +63,11 @@ public class Janela implements ActionListener {
 		}
 		// caso o botao clicado seja o confirma do funcionario
 		if (e.getSource() == logFunc.btConfirma) {
-			if (logFunc.txtId.getText().equals("123") | logFunc.txtSenha.getText().equals("123")) {
-				new TelaAddCarro();
+			if (logFunc.txtId.getText().equals("123") | logFunc.txtSenha.getPassword().equals("123")) {
+				new TelaFunc();
 				principal.dispose();
-				
-			} else if (logUser.txtLog.getText().equals("") || logUser.txtSenha.getText().equals("")) {
+
+			} else if (logUser.txtLog.getText().equals("") || logUser.txtSenha.getPassword().equals("")) {
 				JOptionPane.showMessageDialog(null, "Digite o usuario e senha");
 			}
 		}

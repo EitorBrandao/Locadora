@@ -1,8 +1,11 @@
 package entities;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Usuario {
 
-	
+	private int id;
 	private String nome;
 	private String cpf;
 	private String email;
@@ -10,6 +13,7 @@ public class Usuario {
 	private String casaNum;
 	private String telefone;
 	private String senha;
+
 	
 	public String getNome() {
 		return nome;
@@ -53,9 +57,18 @@ public class Usuario {
 	public void setCasaNum(String casaNum) {
 		this.casaNum = casaNum;
 	}
-
+			
+	public void setSenha(char[] password) {
+		
+	}
 	public void Aluga() {
 		
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

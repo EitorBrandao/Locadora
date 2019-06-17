@@ -3,31 +3,39 @@ package boundaries;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import control.CadastroFuncControl;
+import entities.Funcionario;
+
 public class TelaCadastroFunc implements ActionListener {
 
+	CadastroFuncControl funcControl = new CadastroFuncControl();
+	Funcionario func = new Funcionario();
 	JFrame telaCadFunc = new JFrame("Cadastro de Funcionários");
 	JPanel painelCadFunc = new JPanel();
-	
+
 	JTextField txtNome = new JTextField();
 	JTextField txtId = new JTextField();
 	JTextField txtConfSenha = new JTextField();
 	JTextField txtSenha = new JTextField();
-	
+
 	JLabel lblCadastroFunc = new JLabel("Cadastro de Funcionários");
 	JLabel lblNomeFunc = new JLabel("Nome");
 	JLabel lblId = new JLabel("ID");
 	JLabel lblSenha = new JLabel("Senha");
 	JLabel lblConfSenha = new JLabel("Confirme sua senha");
-	
+
 	JButton btHome = new JButton("HOME");
 	JButton btConfCadFunc = new JButton("Confirmar");
+	JButton btPesq = new JButton("Pesquisar");
 
 	public TelaCadastroFunc() {
 
@@ -38,7 +46,7 @@ public class TelaCadastroFunc implements ActionListener {
 		telaCadFunc.setResizable(false);
 		telaCadFunc.setLocationRelativeTo(null);
 		telaCadFunc.getContentPane().add(painelCadFunc);
-		telaCadFunc.add(painelCadFunc);
+		telaCadFunc.getContentPane().add(painelCadFunc);
 		painelCadFunc.setLayout(null);
 
 		// fontes dos labels
@@ -82,14 +90,40 @@ public class TelaCadastroFunc implements ActionListener {
 
 		// botões
 		btHome.setBounds(400, 10, 100, 30);
-		btConfCadFunc.setBounds(400, 240, 100, 30);
+		btConfCadFunc.setBounds(400, 174, 100, 30);
+		btPesq.setBounds(400, 238, 100, 30);
 
-		//adicionando os botoes no painel
+		// adicionando os botoes no painel
 		painelCadFunc.add(btHome);
 		painelCadFunc.add(btConfCadFunc);
+		painelCadFunc.add(btPesq);
 
-		//adicionando actionListener nos botoes
+		// adicionando actionListener nos botoes
 		btHome.addActionListener(this);
+		btConfCadFunc.addActionListener(this);
+		btPesq.addActionListener(this);
+	}
+
+	public void funcToBoundary(Funcionario func) {
+
+		txtNome.setText(func.getNome());
+		txtId.setText(String.format("%d", func.getId()));
+		txtSenha.setText(func.getSenha());
+		txtConfSenha.setText(func.getSenha());
+
+	}
+
+	public Funcionario boundaryToFunc() {
+
+		try {
+
+			func.setNome(txtNome.getText());
+			func.setId(Integer.parseInt(txtId.getText()));
+			func.setSenha(txtSenha.getText());
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		return func;
 	}
 
 	@Override
@@ -100,6 +134,36 @@ public class TelaCadastroFunc implements ActionListener {
 			telaCadFunc.dispose();
 			new Janela();
 		}
+		if (e.getSource() == btConfCadFunc) {
+			if (txtNome.getText().equals("") | txtId.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "Por favor, insira seus dados");
+			} else if (txtSenha.getText() == null) {
+				JOptionPane.showMessageDialog(null, "Digite uma senha");
+			} else if (txtConfSenha.getText() == null) {
+				JOptionPane.showMessageDialog(null, "Confirme sua senha");
+			} else if (!txtSenha.getText().equals(txtConfSenha.getText()) | txtSenha.getText() == null
+					| txtConfSenha.getText() == null) {
+				JOptionPane.showMessageDialog(null, "Senhas divergentes");
+			} else {
+				Funcionario func = boundaryToFunc();
 
+				try {
+					funcControl.inserirFuncionario(func);
+					JOptionPane.showMessageDialog(null, "Funcionario " + func.getNome() + " cadastrado com sucesso");
+				} catch (ClassNotFoundException | SQLException e1) {
+					e1.printStackTrace();
+				}
+
+				txtNome.setText(null);
+				txtId.setText(null);
+				txtSenha.setText(null);
+				txtConfSenha.setText(null);
+				telaCadFunc.dispose();
+				new Janela();
+			}
+		}
+		if (e.getSource() == btPesq) {
+			funcToBoundary(func);
+		}
 	}
 }

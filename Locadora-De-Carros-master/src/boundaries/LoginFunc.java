@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class LoginFunc implements ActionListener {
@@ -14,7 +15,7 @@ public class LoginFunc implements ActionListener {
 	JLabel lblID = new JLabel("ID");
 	JLabel lblSenhaFunc = new JLabel("Senha");
 	JTextField txtId = new JTextField();
-	JTextField txtSenha = new JTextField();
+	JPasswordField txtSenha = new JPasswordField();
 	JButton btCad = new JButton("Cadastrar");
 	JButton btConfirma = new JButton("Confirmar");
 

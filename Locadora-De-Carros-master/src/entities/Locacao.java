@@ -1,20 +1,15 @@
 package entities;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Locacao {
 
-	private Date dataLocacao;
+	private SimpleDateFormat dataLocacao = new SimpleDateFormat("dd/MM/yyyy");
 	private Usuario usuario;
 	private Carro carro;
 
-	public Date getDataLocacao() {
-		return dataLocacao;
-	}
-
-	public void setDataLocacao(Date dataLocacao) {
-		this.dataLocacao = dataLocacao;
-	}
+	
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -30,5 +25,13 @@ public class Locacao {
 
 	public void setCarro(Carro carro) {
 		this.carro = carro;
+	}
+
+	public SimpleDateFormat getDataLocacao() {
+		return dataLocacao;
+	}
+
+	public void setDataLocacao(SimpleDateFormat dataLocacao) {
+		this.dataLocacao = dataLocacao;
 	}
 }

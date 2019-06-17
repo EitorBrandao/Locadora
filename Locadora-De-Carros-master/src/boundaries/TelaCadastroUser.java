@@ -3,19 +3,22 @@ package boundaries;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
-
-import control.UsuarioControl;
+import control.CadastroUsuarioControl;
 import entities.Usuario;
 
 public class TelaCadastroUser implements ActionListener {
+	Usuario user = new Usuario();
+	CadastroUsuarioControl userControl = new CadastroUsuarioControl();
+
 	JFrame telaCadUser = new JFrame("Cadastro de Usuário");
 	JPanel painelCadUser = new JPanel();
 	JLabel lblNome = new JLabel("Nome");
@@ -34,8 +37,8 @@ public class TelaCadastroUser implements ActionListener {
 	JTextField txtEnd = new JTextField();
 	JTextField txtTel = new JTextField();
 	JTextField txtSenha = new JTextField();
-	JTextField txtNum = new JTextField();
 	JTextField txtConfSenha = new JTextField();
+	JTextField txtNum = new JTextField();
 
 	JButton btConfirmaCad = new JButton("Confirmar");
 	JButton btHome = new JButton("HOME");
@@ -64,14 +67,14 @@ public class TelaCadastroUser implements ActionListener {
 
 		// posições e tamanho dos labels
 		lblCadUser.setBounds(275, 27, 250, 55);
-		lblNome.setBounds(45, 160, 46, 14);
-		lblEmail.setBounds(45, 220, 98, 14);
-		lblCpf.setBounds(45, 280, 46, 14);
-		lblEnd.setBounds(45, 340, 70, 19);
-		lblNum.setBounds(501, 340, 65, 14);
-		lblTel.setBounds(45, 400, 70, 14);
-		lblSenha.setBounds(45, 460, 46, 14);
-		lblConfSenha.setBounds(45, 520, 135, 14);
+		lblNome.setBounds(45, 120, 46, 14);
+		lblEmail.setBounds(45, 180, 98, 14);
+		lblCpf.setBounds(45, 240, 46, 14);
+		lblEnd.setBounds(45, 300, 70, 19);
+		lblNum.setBounds(501, 300, 65, 14);
+		lblTel.setBounds(45, 360, 70, 14);
+		lblSenha.setBounds(45, 420, 46, 14);
+		lblConfSenha.setBounds(45, 480, 135, 14);
 
 		// adicionando os labels no painel
 		painelCadUser.add(lblCadUser);
@@ -85,14 +88,14 @@ public class TelaCadastroUser implements ActionListener {
 		painelCadUser.add(lblConfSenha);
 
 		// posições e tamanho dos textFields
-		txtNome.setBounds(125, 160, 320, 20);
-		txtEmail.setBounds(125, 220, 320, 20);
-		txtCpf.setBounds(125, 280, 320, 20);
-		txtEnd.setBounds(125, 340, 320, 20);
-		txtNum.setBounds(575, 340, 85, 20);
-		txtTel.setBounds(125, 400, 320, 20);
-		txtSenha.setBounds(198, 460, 248, 20);
-		txtConfSenha.setBounds(198, 520, 248, 20);
+		txtNome.setBounds(125, 120, 320, 20);
+		txtEmail.setBounds(125, 180, 320, 20);
+		txtCpf.setBounds(125, 240, 320, 20);
+		txtEnd.setBounds(125, 300, 320, 20);
+		txtNum.setBounds(575, 300, 85, 20);
+		txtTel.setBounds(125, 360, 320, 20);
+		txtSenha.setBounds(198, 420, 248, 20);
+		txtConfSenha.setBounds(198, 480, 248, 20);
 
 		// colunas dos textFields
 		txtNome.setColumns(10);
@@ -114,25 +117,16 @@ public class TelaCadastroUser implements ActionListener {
 		painelCadUser.add(txtSenha);
 		painelCadUser.add(txtConfSenha);
 
-		// botões
-		btHome.setBounds(575, 150, 89, 49);
-		btPesquisar.setBounds(558, 518, 114, 23);
-		btConfirmaCad.setBounds(558, 458, 114, 23);
-
-		// adicionando os botoes no painel
-		painelCadUser.add(btHome);
-		painelCadUser.add(btPesquisar);
+		btConfirmaCad.setBounds(45, 537, 114, 23);
+		btHome.setBounds(620, 34, 89, 60);
+		
 		painelCadUser.add(btConfirmaCad);
+		painelCadUser.add(btHome);
 
-		// adicionando actionListener nos botoes
-		btHome.addActionListener(this);
-		btPesquisar.addActionListener(this);
 		btConfirmaCad.addActionListener(this);
+		btHome.addActionListener(this);
 
 	}
-
-	UsuarioControl userControl = new UsuarioControl();
-	private final JButton btPesquisar = new JButton("Pesquisar");
 
 	public void UserToBoundary(Usuario user) {
 
@@ -146,8 +140,6 @@ public class TelaCadastroUser implements ActionListener {
 		txtConfSenha.setText(user.getSenha());
 
 	}
-
-	Usuario user = new Usuario();
 
 	public Usuario BoundaryToUser() {
 
@@ -163,8 +155,6 @@ public class TelaCadastroUser implements ActionListener {
 
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
 		}
 		return user;
 	}
@@ -172,17 +162,35 @@ public class TelaCadastroUser implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
+		if (e.getSource() == btHome) {
+
+			telaCadUser.dispose();
+			new Janela();
+		}
+
 		if (e.getSource() == btConfirmaCad) {
+
 			if (txtNome.getText().equals("") | txtCpf.getText().equals("") | txtEmail.getText().equals("")
 					| txtEnd.getText().equals("") | txtNum.getText().equals("") | txtTel.getText().equals("")) {
-				System.out.println("Por favor, insira seus dados");
-			} else if (txtSenha.getText().equals("")) {
-				System.out.println("senha vazia");
-			} else if (txtConfSenha.getText().equals("")) {
-				System.out.println("confirme sua senha");
+				JOptionPane.showMessageDialog(null, "Por favor, insira seus dados");
+			} else if (txtSenha.getText() == null) {
+				JOptionPane.showMessageDialog(null, "Digite uma senha");
+			} else if (txtConfSenha.getText() == null) {
+				JOptionPane.showMessageDialog(null, "Confirme sua senha");
+
+			} else if (!txtSenha.getText().equals(txtConfSenha.getText()) | txtSenha.getText() == null
+					| txtConfSenha.getText() == null) {
+				JOptionPane.showMessageDialog(null, "Senhas divergentes");
 			} else {
-				Usuario user = BoundaryToUser();
-				userControl.CadastraUser(user);
+				user = BoundaryToUser();
+				try {
+					userControl.cadastraUser(user);
+
+				} catch (ClassNotFoundException | SQLException e1) {
+
+					e1.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(null, "Usuario " + user.getNome() + "' cadastrado com sucesso!");
 				txtNome.setText(null);
 				txtCpf.setText(null);
 				txtEmail.setText(null);
@@ -191,24 +199,11 @@ public class TelaCadastroUser implements ActionListener {
 				txtTel.setText(null);
 				txtSenha.setText(null);
 				txtConfSenha.setText(null);
+				telaCadUser.dispose();
+				new Janela();
 			}
-		}
-		if (e.getSource() == btHome) {
-
-			telaCadUser.dispose();
-			new Janela();
-
-		}
-		if (e.getSource() == btPesquisar) {
-
-			Usuario user = BoundaryToUser();
-			userControl.PesquisarUser(user.getNome());
-			txtCpf.setText(user.getCpf());
-			txtEmail.setText(user.getEmail());
-			txtEnd.setText(user.getEndereco());
-			txtNum.setText(user.getCasaNum());
-			txtTel.setText(user.getTelefone());
 		}
 
 	}
+
 }

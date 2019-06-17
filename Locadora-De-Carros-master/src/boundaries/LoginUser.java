@@ -3,6 +3,7 @@ package boundaries;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class LoginUser {
@@ -11,7 +12,7 @@ public class LoginUser {
 	String confSenha;
 	JPanel loginUser = new JPanel();
 	JTextField txtLog = new JTextField();
-	JTextField txtSenha = new JTextField();
+	JPasswordField txtSenha = new JPasswordField();
 	JLabel lblLog = new JLabel("CPF ou Email");
 	JLabel lblSenha = new JLabel("Senha");
 	JLabel lblCad = new JLabel("É novo? Cadastre-se!");
